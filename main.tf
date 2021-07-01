@@ -3,12 +3,12 @@ provider "azurerm" {
 }
 
 locals {
-  servicename = "${var.servicename}-${var.role}-${var.deploy_environment}"
+  servicename_role_environment = "${var.servicename}-${var.role}-${var.deploy_environment}"
 }
 
 resource "azurerm_eventhub_namespace" "eventhub_namespace" {
   provider            = azurerm.src
-  name                = "m-${local.servicename}-ns"
+  name                = "m-${local.servicename_role_environment}-ns"
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
   sku                 = var.sku
@@ -23,7 +23,7 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
 
 resource "azurerm_eventhub" "eventhub" {
   provider            = azurerm.src
-  name                = "m-${local.servicename}-eh"
+  name                = "m-${local.servicename_role_environment}-eh"
   namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
   resource_group_name = var.resource_group_name
   partition_count     = 2
