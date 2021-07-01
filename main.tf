@@ -26,8 +26,8 @@ resource "azurerm_eventhub" "eventhub" {
   name                = "m-${local.servicename_role_environment}-eh"
   namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
   resource_group_name = var.resource_group_name
-  partition_count     = 2
-  message_retention   = 7
+  partition_count     = var.partition_count
+  message_retention   = var.message_retention
 }
 
 resource "azurerm_eventhub_consumer_group" "logstash_consumer_group" {
