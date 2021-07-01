@@ -59,7 +59,7 @@ resource "azurerm_eventhub_authorization_rule" "logstash_rule" {
 
 resource "azurerm_eventhub_authorization_rule" "api_rule" {
   provider            = azurerm.src
-  name                = "logAccessKey"
+  name                = "loggingApplicationAccessKey"
   namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
   eventhub_name       = azurerm_eventhub.eventhub.name
   resource_group_name = var.resource_group_name
