@@ -19,3 +19,7 @@ variable "resource_group_location" {
 variable "sku" {
   type = string
 }
+
+variable "retention_days" {
+  description = "depends on sku, Basic cannot be higher than 1"
+}
