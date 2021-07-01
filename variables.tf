@@ -19,7 +19,10 @@ variable "resource_group_location" {
 variable "sku" {
   type = string
 }
-
+variable "partition_count" {
+  default = 2
+}
 variable "retention_days" {
   description = "depends on sku, Basic cannot be higher than 1"
+  default = 7
 }
