@@ -22,7 +22,7 @@ variable "sku" {
 variable "partition_count" {
   default = 2
 }
-variable "retention_days" {
+variable "message_retention" {
   description = "depends on sku, Basic cannot be higher than 1"
   default = 7
 }
