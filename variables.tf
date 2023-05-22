@@ -17,7 +17,9 @@ variable "resource_group_location" {
   type = string
 }
 variable "sku" {
+  description = "Basic, Standard or Premium, services and options will vary depending on level, check docs for desires. Default to standard"
   type = string
+  default = "Standard"
 }
 variable "partition_count" {
   default = 2
