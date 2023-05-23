@@ -1,6 +1,4 @@
-provider "azurerm" {
-  alias = "src"
-}
+
 
 locals {
   servicename_role_environment = "${var.servicename}-${var.role}-${var.deploy_environment}"
