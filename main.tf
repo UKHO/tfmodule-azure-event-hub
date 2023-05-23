@@ -1,6 +1,4 @@
-provider "azurerm" {
-  alias = "src"
-}
+
 
 locals {
   servicename_role_environment = "${var.servicename}-${var.role}-${var.deploy_environment}"
@@ -30,14 +28,6 @@ resource "azurerm_eventhub" "eventhub" {
   message_retention   = var.message_retention
 }
 
-resource "azurerm_eventhub_consumer_group" "logstash_consumer_group" {
-  provider            = azurerm.src
-  name                = "logstash"
-  namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
-  eventhub_name       = azurerm_eventhub.eventhub.name
-  resource_group_name = var.resource_group_name
-}
-
 resource "azurerm_eventhub_consumer_group" "logging_application_consumer_group" {
   provider            = azurerm.src
   name                = "loggingApplication"
@@ -46,20 +36,20 @@ resource "azurerm_eventhub_consumer_group" "logging_application_consumer_group" 
   resource_group_name = var.resource_group_name
 }
 
-resource "azurerm_eventhub_authorization_rule" "logstash_rule" {
+resource "azurerm_eventhub_authorization_rule" "api_rule_send" {
   provider            = azurerm.src
-  name                = "logstashAccessKey"
+  name                = "SendAccessKey"
   namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
   eventhub_name       = azurerm_eventhub.eventhub.name
   resource_group_name = var.resource_group_name
-  listen              = true
-  send                = false
+  listen              = false
+  send                = true
   manage              = false
 }
 
-resource "azurerm_eventhub_authorization_rule" "api_rule" {
+resource "azurerm_eventhub_authorization_rule" "api_rule_listen" {
   provider            = azurerm.src
-  name                = "loggingApplicationAccessKey"
+  name                = "ListenAccessKey"
   namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
   eventhub_name       = azurerm_eventhub.eventhub.name
   resource_group_name = var.resource_group_name

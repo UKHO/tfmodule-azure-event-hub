@@ -28,8 +28,11 @@ variable "resource_group_name" {
 variable "resource_group_location" {
   type = string
 }
+
 variable "sku" {
+  description = "Basic, Standard or Premium, services and options will vary depending on level, check docs for desires. Default to standard"
   type = string
+  default = "Standard"
 }
 variable "partition_count" {
   default = 2
@@ -40,7 +43,7 @@ variable "message_retention" {
 }
 
 module "eventhub" {
-  source                       = "github.com/ukho/tfmodule-azure-event-hub?ref=0.2.0"
+  source                       = "github.com/ukho/tfmodule-azure-event-hub?ref=0.4.0"
   providers = {
     azurerm.src = azurerm.alias
   }
@@ -50,8 +53,9 @@ module "eventhub" {
   role                        = var.role
   resource_group_name         = var.resource_group_name
   resource_group_location     = var.resource_group_location
-  sku                         = var.sku
-  partition_count             = var.partition_count
-  message_retention           = var.message_retention
  }
 ```
+
+## Outputs
+
+This module outputs 2 values, one is `event_hub_namespace_name` and the other is `event_hub_name`
