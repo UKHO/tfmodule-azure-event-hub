@@ -1,6 +1,7 @@
 
 
 locals {
+  servicename_role = "${var.servicename}-${var.role}"
   servicename_role_environment = "${var.servicename}-${var.role}-${var.deploy_environment}"
 }
 
@@ -21,7 +22,7 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
 
 resource "azurerm_eventhub" "eventhub" {
   provider            = azurerm.src
-  name                = "m-${local.servicename_role_environment}-eh"
+  name                = "m-${local.servicename_role}-eh"
   namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
   resource_group_name = var.resource_group_name
   partition_count     = var.partition_count
