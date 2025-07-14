@@ -1,7 +1,7 @@
 
 
 locals {
-  servicename_role = "${var.servicename}-${var.role}"
+  servicename_role = "${var.servicename}-${var.role}-${var.deploy_environment}"
   servicename_role_environment = "${var.servicename}-${var.role}-${var.deploy_environment}"
 }
 
