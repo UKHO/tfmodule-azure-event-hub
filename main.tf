@@ -22,7 +22,7 @@ resource "azurerm_eventhub_namespace" "eventhub_namespace" {
 
 resource "azurerm_eventhub" "eventhub" {
   provider            = azurerm.src
-  name                = "m-${local.servicename_role}-eh"
+  name                = "m-${local.servicename_role}-evh"
   namespace_name      = azurerm_eventhub_namespace.eventhub_namespace.name
   resource_group_name = var.resource_group_name
   partition_count     = var.partition_count
