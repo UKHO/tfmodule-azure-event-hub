@@ -1,8 +1,7 @@
 
 
 locals {
-  service_role = "${var.service}-${var.role}-${var.environment}"
-  service_role_environment = "${var.service}-${var.role}-${var.environment}"
+  service_role = "${var.product}-${var.service}-${var.role}-${var.environment}"
 }
 
 resource "azurerm_eventhub" "eventhub" {

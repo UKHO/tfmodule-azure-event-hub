@@ -1,3 +1,8 @@
+variable "product" {
+  type = string
+  description = "the product name"
+}
+
 variable "service" {
   type = string
   description = "the service name"
