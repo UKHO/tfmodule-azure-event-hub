@@ -1,8 +1,8 @@
-variable "servicename" {
+variable "service" {
   type = string
   description = "the service name"
 }
-variable "deploy_environment" {
+variable "environment" {
   type = string
   description = "deployment environment"
 }
@@ -10,17 +10,20 @@ variable "role" {
   type = string
   description = "it's role within the service"
 }
+
 variable "resource_group_name" {
   type = string
 }
-variable "resource_group_location" {
+
+variable "eventhub_namespace_id" {
   type = string
+  description = "the event hub namespace id"
 }
-variable "sku" {
-  description = "Basic, Standard or Premium, services and options will vary depending on level, check docs for desires. Default to standard"
+variable "eventhub_namespace_name" {
   type = string
-  default = "Standard"
+  description = "the event hub namespace name"
 }
+
 variable "partition_count" {
   default = 2
 }
