@@ -1,6 +1,6 @@
 # Terraform Module: for Azure Event Hub
 
-use module resource to reference this service.
+use module resource to reference this service. This module does not create the namespace
 
 ## Required Resources
 
@@ -29,6 +29,15 @@ variable "resource_group_location" {
   type = string
 }
 
+variable "eventhub_namespace_id" {
+  type = string
+  description = "the event hub namespace id"
+}
+variable "eventhub_namespace_name" {
+  type = string
+  description = "the event hub namespace name"
+}
+
 variable "sku" {
   description = "Basic, Standard or Premium, services and options will vary depending on level, check docs for desires. Default to standard"
   type = string
@@ -43,11 +52,13 @@ variable "message_retention" {
 }
 
 module "eventhub" {
-  source                       = "github.com/ukho/tfmodule-azure-event-hub?ref=0.4.0"
+  source                       = "github.com/ukho/tfmodule-azure-event-hub?ref=0.8.1"
   providers = {
     azurerm.src = azurerm.alias
   }
-  
+
+  eventhub_namespace_id       = var.eventhub_namespace_id
+  eventhub_namespace_name     = var.eventhub_namespace_name
   servicename                 = var.servicename
   deploy_environment          = var.deploy_environment
   role                        = var.role
@@ -58,4 +69,4 @@ module "eventhub" {
 
 ## Outputs
 
-This module outputs 2 values, one is `event_hub_namespace_name` and the other is `event_hub_name`
+This module outputs 2 values, one is `eventhub_send_primarykey` and the other is `event_hub_name`
